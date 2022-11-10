@@ -1,0 +1,17 @@
+<form ngForm #SignInForm>
+    <mat-form-field>
+        <input matInput [(ngModel)]="last_name" name="nom" placeholder="Nom">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="first_name" name="first_name" placeholder="Prénom">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="username" name="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="password" name="password" placeholder="Password" type="password">
+    </mat-form-field>
+    <button mat-stroked-button class="signInBtn" color="primary" (click)="onSubmit(); SignInForm.reset()">
+        Inscription
+    </button>
+</form>

@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-button routerLink="/home">
+            <mat-icon>home</mat-icon>
+        </button>
+        <nav>
+            <a class="title" routerLink="/home">{{title}}</a>
+        </nav>
+        <button mat-button routerLink="/login" [disabled]="isloggedIn()">
+            <mat-icon>login</mat-icon>
+        </button>
+        <button mat-button routerLink="/home" (click)="logOut()" [disabled]="!isloggedIn()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        <div class="log">
+            <p *ngIf="this.currentUser().username">Connecté en tant que</p>
+            <p class="nom">{{this.currentUser().first_name}} {{this.currentUser().last_name}}</p>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<!-- Plus besoin
+    <app-assignments></app-assignments> 
+-->
+
+<router-outlet></router-outlet>

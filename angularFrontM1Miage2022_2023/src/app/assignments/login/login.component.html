@@ -1,0 +1,12 @@
+<form ngForm #LogginForm>
+    <mat-form-field>
+        <input matInput [(ngModel)]="username" name="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="password" name="password" placeholder="Password" type="password">
+    </mat-form-field>
+    <button mat-stroked-button class="logInBtn" color="primary" (click)="onSubmit(); LogginForm.reset()">
+        Connexion
+    </button>
+</form>
+<p>Pas encore inscrit ? <button mat-stroked-button class="signInBtn" color="primary" routerLink="/signin">Inscription</button></p>

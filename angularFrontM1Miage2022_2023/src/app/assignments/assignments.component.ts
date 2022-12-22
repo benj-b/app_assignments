@@ -4,6 +4,7 @@ import { Assignment } from './assignments.model';
 import { AuthService } from '../shared/auth.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
@@ -29,7 +30,7 @@ export class AssignmentsComponent implements OnInit {
   sortedData: Assignment[] = this.assignments;
 
 
-  constructor(private assignmentService:AssignmentsService, private authservice:AuthService) {
+  constructor(private assignmentService:AssignmentsService, private authservice:AuthService, private router: Router) {
     this.sortedData = this.assignments.slice();
   }
 
@@ -63,7 +64,9 @@ export class AssignmentsComponent implements OnInit {
   // }
 
   assignmentClick(assignment:Assignment){
-    this.assignmentSelect = assignment;
+    console.log(assignment);
+    // this.assignmentSelect = assignment;
+    this.router.navigate(['/assignments/', assignment.id]);
   }
 
   // onNouvelAssignment(newAssignment:Assignment){

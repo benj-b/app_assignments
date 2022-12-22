@@ -36,4 +36,10 @@ export class AddAssignmentComponent implements OnInit {
       this.router.navigate(['/home']);
     }
   }
+
+  peuplerBDAvecForkJoin() {
+    this.assignmentService.peuplerBDAvecForkJoin().subscribe(message => console.log(message));
+  }
 }
+
+

@@ -21,6 +21,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 
@@ -70,7 +72,9 @@ const routes : Routes = [
     MatSlideToggleModule,
     HttpClientModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

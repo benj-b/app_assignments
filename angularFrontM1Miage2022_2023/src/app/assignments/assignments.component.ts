@@ -3,6 +3,7 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignments.model';
 import { AuthService } from '../shared/auth.service';
 import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-assignments',
@@ -19,13 +20,18 @@ export class AssignmentsComponent implements OnInit {
   prevPage: number;
   hasNextPage: boolean;
   nextPage: number;
-
+  
   titre = "Mon application sur les assignments !"
   formVisible = false;
   assignmentSelect:Assignment = new Assignment;
   assignments:Assignment[] = [];
 
-  constructor(private assignmentService:AssignmentsService, private authservice:AuthService) {}
+  sortedData: Assignment[] = this.assignments;
+
+
+  constructor(private assignmentService:AssignmentsService, private authservice:AuthService) {
+    this.sortedData = this.assignments.slice();
+  }
 
   ngOnInit(): void {
     // this.assignments = this.assignmentService.getAssignments();
@@ -77,5 +83,35 @@ export class AssignmentsComponent implements OnInit {
     this.limit = event.pageSize;
     this.ngOnInit();
   }
+
+  displayedColumns: string[] = ['id', 'name', 'Date', 'Rendu'];
+
+  sortData(sort: Sort) {
+    const data = this.assignments.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name':
+          return compare(a.nom, b.nom, isAsc);
+        case 'ID':
+          return compare(a.id, b.id, isAsc);
+        case 'Date':
+          return compare(a.dateDeRendu, b.dateDeRendu, isAsc);
+        case 'Rendu':
+          return compare(a.rendu, b.rendu, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+}
+
+function compare(a: number | string | Date | boolean, b: number | string | Date | boolean, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 

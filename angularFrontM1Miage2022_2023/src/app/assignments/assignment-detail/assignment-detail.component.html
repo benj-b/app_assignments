@@ -6,7 +6,7 @@
             Devoir rendu
         </mat-checkbox>
 
-        <button mat-raised-button class="EditBtn" color="primary" (click)="onClickEdit()" [disabled]="!isAdmin()">
+        <button mat-raised-button class="EditBtn" color="primary" (click)="onClickEdit()" [disabled]="!isloggedIn()">
             Modifier
         </button>
 

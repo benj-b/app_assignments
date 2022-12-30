@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
@@ -21,8 +21,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -41,7 +44,7 @@ const routes : Routes = [
   // http://localhost:4200/add
   {path : 'add', component:AddAssignmentComponent},
   {path : 'assignments/:id', component:AssignmentDetailComponent},
-  {path : 'assignments/:id/edit', component:EditAssignmentComponent, canActivate:[AuthGuard]},
+  {path : 'assignments/:id/edit', component:EditAssignmentComponent},
   // {path : 'assignments/:id/edit', component:EditAssignmentComponent}
   {path : 'login', component:LoginComponent},
   {path : 'signin', component:SignInComponent}
@@ -63,7 +66,7 @@ const routes : Routes = [
     BrowserAnimationsModule,
     MatButtonModule, MatIconModule, MatDividerModule,
     MatInputModule, MatFormFieldModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     MatDatepickerModule, MatNativeDateModule,
     MatListModule, 
     MatCardModule, MatCheckboxModule,
@@ -74,9 +77,13 @@ const routes : Routes = [
     MatTooltipModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
+    MatStepperModule
   ],
-  providers: [],
+  providers: [
+    { provide: FormBuilder, useClass: FormBuilder }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

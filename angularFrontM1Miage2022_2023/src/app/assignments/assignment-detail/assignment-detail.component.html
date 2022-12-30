@@ -1,16 +1,49 @@
 <div class="container">
     <mat-card *ngIf="assignmentTransmis.nom">
         <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
+        <img [src]="assignmentTransmis.image" alt="image du prof" />
         <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+
+        <mat-card-content>
+            <p>
+                <span class="bold">Nom du devoir : </span>
+                {{assignmentTransmis.nom}}
+            </p>
+            <p>
+                <span class="bold">Date de rendu : </span>
+                {{assignmentTransmis.dateDeRendu | date}}
+            </p>
+            <p>
+                <span class="bold">Auteur : </span>
+                {{assignmentTransmis.auteur}}
+            </p>
+            <p>
+                <span class="bold">Matière : </span>
+                {{assignmentTransmis.matiere}}
+            </p>
+            <p>
+                <span class="bold">Rendu : </span>
+                {{assignmentTransmis.rendu? "Oui" : "Non"}}
+            </p>
+            <p *ngIf="assignmentTransmis.rendu">
+                <span class="bold">Note : </span>
+                {{assignmentTransmis.mark}}
+            </p>
+            <p *ngIf="assignmentTransmis.rendu">
+                <!-- <span class="bold">Remarque : </span> -->
+                <span class="remarque"> "{{assignmentTransmis.remarque}}" </span>
+            </p>
+        </mat-card-content>
+
         <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()" [disabled]="!isloggedIn()">
             Devoir rendu
         </mat-checkbox>
-
         <button mat-raised-button class="EditBtn" color="primary" (click)="onClickEdit()" [disabled]="!isloggedIn()">
             Modifier
         </button>
 
-        <button mat-stroked-button class="DeleteBtn" color="primary" (click)="onDeleteAssignment()" [disabled]="!isAdmin()">
+        <button mat-stroked-button class="DeleteBtn" color="primary" (click)="onDeleteAssignment()"
+            [disabled]="!isAdmin()">
             Supprimer le devoir
         </button>
         <!-- <app-delete-assignment [assignmentToDelete]="assignmentTransmis" (deleteAssignment)="onDeleteAssignment($event)"></app-delete-assignment> -->

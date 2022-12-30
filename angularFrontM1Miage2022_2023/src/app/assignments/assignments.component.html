@@ -30,6 +30,19 @@
         </nav>
     </mat-list> -->
 
+
+    <div class="dropdown">
+        <mat-form-field appearance="fill">
+            <mat-label>Rendu ?</mat-label>
+            <mat-select (selectionChange)="onChange($event)">
+                <mat-option value="rendu">Oui</mat-option>
+                <mat-option value="nonrendu">Non</mat-option>
+                <mat-option value="all">Tous</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
     <table mat-table [dataSource]="this.assignments" matSort (matSortChange)="sortData($event)">
         <!-- ID Column -->
         <ng-container matColumnDef="id">
@@ -39,19 +52,29 @@
 
         <!-- name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header='name' sortActionDescription="Sort by names"> Nom </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header='name' sortActionDescription="Sort by names"> Nom
+            </th>
             <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+        </ng-container>
+
+        <!-- matiere Column -->
+        <ng-container matColumnDef="matiere">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header='matiere' sortActionDescription="Sort by courses"> Matière
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matiere}} </td>
         </ng-container>
 
         <!-- Date de Rendu Column -->
         <ng-container matColumnDef="Date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header='Date' sortActionDescription="Sort by dates"> Date de Rendu </th>
-            <td mat-cell *matCellDef="let element"> {{element.dateDeRendu}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header='Date' sortActionDescription="Sort by dates"> Date de
+                Rendu </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateDeRendu | date:"fullDate":"fr"}} </td>
         </ng-container>
 
         <!-- Rendu Column -->
         <ng-container matColumnDef="Rendu">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header='Rendu' sortActionDescription="Sort by rendu"> Rendu </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header='Rendu' sortActionDescription="Sort by rendu"> Rendu
+            </th>
             <td mat-cell *matCellDef="let element"> {{element.rendu}} </td>
         </ng-container>
 
@@ -60,9 +83,7 @@
     </table>
 
     <mat-paginator (page)="handlePage($event)" [length]="this.totalDocs" [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-        class="mat-paginator-sticky">
-        >
+        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page" class="mat-paginator-sticky">
     </mat-paginator>
 
     <!-- <app-assignment-detail [assignmentTransmis]="assignmentSelect"></app-assignment-detail> -->

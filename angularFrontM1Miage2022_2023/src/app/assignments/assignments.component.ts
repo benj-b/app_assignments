@@ -15,12 +15,12 @@ export class AssignmentsComponent implements OnInit {
 
   page: number=1;
   limit: number=10;
-  totalDocs: number;
-  totalPages: number;
-  hasPrevPage: boolean;
-  prevPage: number;
-  hasNextPage: boolean;
-  nextPage: number;
+  totalDocs: number=-1;
+  totalPages: number=-1;
+  hasPrevPage: boolean=false;
+  prevPage: number=-1;
+  hasNextPage: boolean=false;
+  nextPage: number=-1;
   
   titre = "Mon application sur les assignments !"
   formVisible = false;
@@ -87,7 +87,7 @@ export class AssignmentsComponent implements OnInit {
     this.ngOnInit();
   }
 
-  displayedColumns: string[] = ['id', 'name', 'Date', 'Rendu'];
+  displayedColumns: string[] = ['id', 'name', "matiere", 'Date', 'Rendu' ];
 
   sortData(sort: Sort) {
     const data = this.assignments.slice();
@@ -111,6 +111,19 @@ export class AssignmentsComponent implements OnInit {
           return 0;
       }
     });
+  }
+  
+  // Function that sort the table by rendu or not rendu
+  onChange(event: any): void {
+    //log
+    console.log(event.value);
+    if (event.value === 'rendu') {
+      this.sortedData = this.assignments.filter((assignment) => assignment.rendu === true);
+    } else if (event.value === 'nonrendu') {
+      this.sortedData = this.assignments.filter((assignment) => assignment.rendu === false);
+    } else if (event.value === 'all'){
+      this.sortedData = this.assignments;
+    }
   }
 }
 

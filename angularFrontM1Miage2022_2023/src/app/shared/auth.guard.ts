@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
     return this.authService.isAdmin()
     .then(
-      (authentifie: Boolean) => {
+      (authentifie: unknown) => {
         if (authentifie) {
           return true; // l'utilisateur est admin
         } else {

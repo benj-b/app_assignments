@@ -59,6 +59,10 @@ export class AuthService {
     return true;
   }
 
+  getUser() {
+    return this.currentUser.first_name + " " + this.currentUser.last_name;
+  }
+
   users = [
     {
       "username" : "admin",

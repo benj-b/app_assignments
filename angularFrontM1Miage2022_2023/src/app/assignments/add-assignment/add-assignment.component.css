@@ -1,5 +1,46 @@
 .form {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    margin:5px;
-   }
+    margin: 5px;
+}
+
+/* matStepperPrevious */
+.prev {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; */
+}
+
+/* matStepperNext */
+.next {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; */
+    margin-left: 16px;
+}
+
+.reset {
+    background-color: #2665db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; */
+    margin-left: 16px;
+}
+
+.create {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; */
+    margin-left: 16px;
+}

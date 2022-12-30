@@ -1,4 +1,4 @@
-<form class='form' ngForm #assignmentForm>
+<!-- <form class='form' ngForm #assignmentForm>
     <mat-form-field>
         <input matInput [(ngModel)]="nomDevoir" name='nom' placeholder='Nom du devoir'>
     </mat-form-field>
@@ -12,6 +12,68 @@
     <button mat-stroked-button color="primary" (click)="onSubmit(); assignmentForm.reset()">
         Ajouter un devoir
     </button>
-</form>
+</form> -->
 
-<button mat-button (click)="peuplerBDAvecForkJoin()">peupler BD</button>
+<!-- <button mat-button (click)="peuplerBDAvecForkJoin()">peupler BD</button> -->
+
+<!-- <button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button> -->
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+
+    <mat-step label="Nom du devoir">
+        <form [formGroup]="FormGroup">
+            <mat-form-field>
+                <input matInput formControlName="nom" name='nom' placeholder='Nom' required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext class="next">Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step label="Date de rendu">
+        <form [formGroup]="FormGroup">
+            <mat-form-field>
+                <input matInput formControlName="dateRendu" [matDatepicker]="picker" name='date' placeholder='Date' required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious class="prev">Précédent</button>
+                <button mat-button matStepperNext class="next">Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step label="Matière">
+        <form [formGroup]="FormGroup">
+            <mat-form-field>
+                <mat-label>Cours</mat-label>
+                <mat-select formControlName="matiere">
+                    <mat-option *ngFor="let mat of matieres" [value]="mat.value" required>
+                        {{ mat.label }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious class="prev">Précédent</button>
+                <button mat-button matStepperNext class="next">Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Terminé</ng-template>
+        Ce formulaire est entièrement rempli !
+        <br/> <br/>
+        <div>
+            <button mat-button matStepperPrevious class="prev">Précédent</button>
+            <button mat-button (click)="stepper.reset()" class="reset">Reset</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" (disabled)="!FormGroup.valid" class="create">Créer</button>
+        </div>
+    </mat-step>
+
+    <!-- <button mat-button matStepperNext>Next</button>
+    <button mat-button matStepperPrevious>Back</button> -->
+
+</mat-horizontal-stepper>
+

@@ -71,7 +71,7 @@ export class AssignmentsService {
       );
   }
 
-  private handleError<T>(operation, result?: T) {
+  private handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {
       console.log(error);
       console.log(operation + 'a échoué ' + error.message);
@@ -84,12 +84,17 @@ export class AssignmentsService {
     const appelsVersAddAssignment:any = [];
  
     bdInitialAssignments.forEach((a) => {
-      const nouvelAssignment:any = new Assignment();
+      const nouvelAssignment:Assignment = new Assignment();
  
       nouvelAssignment.id = a.id;
-      nouvelAssignment.nom = a.nom;
+      nouvelAssignment.nom = a.name;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
+      nouvelAssignment.auteur = a.auteur;
+      nouvelAssignment.matiere = a.matiere;
+      nouvelAssignment.image = a.image;
+      nouvelAssignment.mark = a.mark;
+      nouvelAssignment.remarque = a.remarque;
  
       appelsVersAddAssignment.push(this.addAssignments(nouvelAssignment));
     });
@@ -101,7 +106,7 @@ export class AssignmentsService {
       const nouvelAssignment = new Assignment();
  
       nouvelAssignment.id = a.id;
-      nouvelAssignment.nom = a.nom;
+      nouvelAssignment.nom = a.name;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;
       try {

@@ -4,6 +4,8 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-add-assignment',
@@ -24,7 +26,7 @@ export class AddAssignmentComponent implements OnInit {
   isLinear = true;
   FormGroup: FormGroup;
 
-  constructor(private assignmentService: AssignmentsService, private router: Router, private fb: FormBuilder, private auth: AuthService) { 
+  constructor(private assignmentService: AssignmentsService, private router: Router, private fb: FormBuilder, private auth: AuthService, public snackBar: MatSnackBar) {
     this.FormGroup = this.fb.group({
       nom: '',
       dateRendu: '',
@@ -46,7 +48,7 @@ export class AddAssignmentComponent implements OnInit {
       alert('Veuillez remplir tous les champs');
       console.log(this.FormGroup.value);
     }
-    
+
     else {
       // create a new assignment with the values from the form
       let newAssignment: Assignment = {
@@ -55,8 +57,8 @@ export class AddAssignmentComponent implements OnInit {
         dateDeRendu: this.FormGroup.value.dateRendu,
         rendu: false,
         auteur: this.auth.getUser(),
-        matiere: this.FormGroup.value.matiere,
-        image: this.matieres.find(matiere => matiere.value == this.FormGroup.value.matiere)?.img ,
+        matiere: this.matieres.find(matiere => matiere.value == this.FormGroup.value.matiere)?.label,
+        image: this.matieres.find(matiere => matiere.value == this.FormGroup.value.matiere)?.img,
         mark: null,
         remarque: ''
       }
@@ -64,8 +66,9 @@ export class AddAssignmentComponent implements OnInit {
       this.assignmentService.addAssignments(newAssignment).subscribe(assignment => {
         // this.nouvelAssignment.emit(assignment);
         console.log(assignment)
-        // this.router.navigate(['/home']);
-        this.router.navigate(['/assignments/'+newAssignment.id]);
+        this.router.navigate(['/home']);
+        // this.router.navigate(['/assignments/'+newAssignment.id]);
+        this.snackBar.open("Assignement ajouté avec succès (id = " + newAssignment.id + ")", "Fermer", { duration: 2000 });
       });
     }
   }

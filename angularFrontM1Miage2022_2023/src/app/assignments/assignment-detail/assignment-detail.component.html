@@ -3,37 +3,54 @@
         <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
         <img [src]="assignmentTransmis.image" alt="image du prof" />
         <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
-
-        <mat-card-content>
-            <p>
-                <span class="bold">Nom du devoir : </span>
-                {{assignmentTransmis.nom}}
-            </p>
-            <p>
-                <span class="bold">Date de rendu : </span>
-                {{assignmentTransmis.dateDeRendu | date}}
-            </p>
-            <p>
-                <span class="bold">Auteur : </span>
-                {{assignmentTransmis.auteur}}
-            </p>
-            <p>
-                <span class="bold">Matière : </span>
-                {{assignmentTransmis.matiere}}
-            </p>
-            <p>
-                <span class="bold">Rendu : </span>
-                {{assignmentTransmis.rendu? "Oui" : "Non"}}
-            </p>
-            <p *ngIf="assignmentTransmis.rendu">
-                <span class="bold">Note : </span>
-                {{assignmentTransmis.mark}}
-            </p>
-            <p *ngIf="assignmentTransmis.rendu">
-                <!-- <span class="bold">Remarque : </span> -->
-                <span class="remarque"> "{{assignmentTransmis.remarque}}" </span>
-            </p>
-        </mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <p>
+                    <span class="bold">Nom du devoir : </span>
+                    {{assignmentTransmis.nom}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item>
+                <p>
+                    <span class="bold">Date de rendu : </span>
+                    {{assignmentTransmis.dateDeRendu | date}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item>
+                <p>
+                    <span class="bold">Auteur : </span>
+                    {{assignmentTransmis.auteur}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item>
+                <p>
+                    <span class="bold">Matière : </span>
+                    {{assignmentTransmis.matiere}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item>
+                <p>
+                    <span class="bold">Rendu : </span>
+                    {{assignmentTransmis.rendu? "Oui" : "Non"}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item *ngIf="assignmentTransmis.rendu">
+                <p>
+                    <span class="bold">Note : </span>
+                    {{assignmentTransmis.mark}}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+        <p *ngIf="assignmentTransmis.rendu">
+            <!-- <span class="bold">Remarque : </span> -->
+            <span class="remarque"> "{{assignmentTransmis.remarque}}" </span>
+        </p>
 
         <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()" [disabled]="!isloggedIn()">
             Devoir rendu
@@ -46,6 +63,10 @@
             [disabled]="!isAdmin()">
             Supprimer le devoir
         </button>
+        
+        <div *ngIf="assignmentTransmis.mark==20" class="balloon"></div>
+
+
         <!-- <app-delete-assignment [assignmentToDelete]="assignmentTransmis" (deleteAssignment)="onDeleteAssignment($event)"></app-delete-assignment> -->
     </mat-card>
 </div>

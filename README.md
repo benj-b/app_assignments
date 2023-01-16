@@ -3,6 +3,7 @@ M1 Angular course : Projet Final
 
 # Auteurs
 Benjamin BERNAUD
+
 Oscar VILLETTE
 
 # Usage local
